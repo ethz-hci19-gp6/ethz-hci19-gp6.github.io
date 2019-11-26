@@ -1,115 +1,77 @@
-$.getJSON("configs/P1VA.json", function(conf) {
+var file = $("#config").attr("config_file");
+var log_name = $("#config").attr("log_name");
+
+$.getJSON(file, function(conf) {
 
 var NodeConfig = conf["nodes"];
 var Links = conf["links"];
 
-console.log(NodeConfig);
-
 /*
-Mouse pos indicator
+Logging
 */
-var mousePos = new Path.Circle(new Point(20, 20), 15);
-mousePos.fillColor = 'white';
-var mousePosOpacity = 0.2;
-mousePos.opacity = mousePosOpacity;
-function onMouseMove(event) {
-    mousePos.position = event.point;
+
+function log(msg) {
+    var url = "https://lanwg.mikrounix.com/testlogger/";
+    var params = "name="+encodeURI(log_name+"_gui")+"&msg="+encodeURI(msg);
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', url, true)
+    // xhr.withCredentials = true
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(params);
 }
-
-var mouseClick = new Path.Circle(new Point(20, 20), 5);
-mouseClick.fillColor = 'white';
-mouseClick.opacity = 0;
-
-function onMouseDown(event) {
-    mouseClick.opacity = 0.7
-    // mouseClick.radius = 40
-    mouseClick.position = event.point
-    mouseClick.onFrame = function(event) {
-        if (mouseClick.opacity > 0.02) {
-            mouseClick.opacity -= 0.02
-        } else {
-            mouseClick.opacity = 0
-        }
-    }
-}
-
-var toggleMousePos = new Path.Rectangle(
-    new Point(0,0), new Point(180, 16), new Size(2, 2));
-toggleMousePos.fillColor = 'white';
-var togglwMouseText = new PointText(new Point(2, 12));
-togglwMouseText.fillColor = 'black';
-togglwMouseText.content = 'Toggle Mouse Position Indicator';
-
-var toggleMousePosGroup = new Group([toggleMousePos, togglwMouseText]);
-toggleMousePosGroup.onMouseDown = function() {
-    if (mousePos.opacity > 0) {
-        mousePos.opacity = 0;
-    } else {
-        mousePos.opacity = mousePosOpacity;
-    }
-}
-
-
-/*
-testing
-*/
-// var rect = new Path.Rectangle(new Point(40,40), new Point(80, 80), new Size(10, 10));
-// rect.strokeColor = 'white';
-// rect.fillColor = 'white';
-// var rext = new PointText(new Point(60, 167));
-// rext.justification = 'center';
-// rext.fillColor = 'white';
-// rext.content = "ABCDEFG";
-// rext.fontSize = 20;
-// var tg = new Group([rect, rext])
-
 
 /*
 NODE
 */
-var node = new Path.Rectangle(new Point(40,40), new Point(80, 80), new Size(10, 10));
-// node.strokeColor = 'white';
-node.fillColor = 'white';
+function createNode(name) {
+    var node = new Path.Rectangle(
+        new Point(40,40), new Point(80, 80), new Size(10, 10));
+    node.fillColor = 'white';
 
-var nodeText = new PointText(new Point(60, 67));
-nodeText.justification = 'center';
-nodeText.fillColor = 'white';
-nodeText.content = "A";
-nodeText.fontSize = 20;
-nodeText.fontWeight = "bold";
+    var nodeText = new PointText(new Point(60, 67));
+    nodeText.justification = 'center';
+    nodeText.fillColor = 'white';
+    nodeText.content = name;
+    nodeText.fontSize = 20;
+    nodeText.fontWeight = "bold";
 
-var nodeGroup = new Group([node, nodeText]);
-nodeGroup.scale(2);
-nodeGroup.translate({x: 50, y: 100});
-nodeGroup.visible = false;
+    var nodeGroup = new Group([node, nodeText]);
+    nodeGroup.scale(2);
+    nodeGroup.translate({x: 50, y: 100});
+    nodeGroup.visible = false;
+    return nodeGroup
+}
 
 /*
 MENU
 */
-var x = 80;
-var y = 198;
-var l = 200;
-var h = 40;
+function createMenu() {
+    var x = 80;
+    var y = 198;
+    var l = 200;
+    var h = 40;
 
-var menuBar = new Path.Rectangle(new Point(x, y), new Point(x+l, y+h));
-menuBar.strokeColor = 'white';
-menuBar.fillColor = 'black';
-var menuText = new PointText(new Point(x+l/2, y+h/2+4));
-menuText.justification = 'center';
-menuText.fillColor = 'white';
-menuText.content = 'Reachability';
-menuText.fontSize = 16
-var menuItem = new Group([menuBar, menuText]);
+    var menuBar = new Path.Rectangle(new Point(x, y), new Point(x+l, y+h));
+    menuBar.strokeColor = 'white';
+    menuBar.fillColor = 'black';
+    var menuText = new PointText(new Point(x+l/2, y+h/2+4));
+    menuText.justification = 'center';
+    menuText.fillColor = 'white';
+    menuText.content = 'Reachability';
+    menuText.fontSize = 16
+    var menuItem = new Group([menuBar, menuText]);
 
-var menuGroup = new Group([menuItem]);
-var menuItemNum = 4
-var menuTextList = ["Isolation", "Waypoint", "Load Balancing"]
-for (var i = 1; i < menuItemNum; i++) {
-    var menu = menuItem.clone().translate({x: 0, y: h*i});
-    menu.children[1].content = menuTextList[i-1]
-    menuGroup.addChild(menu);
+    var menuGroup = new Group([menuItem]);
+    var menuItemNum = 4
+    var menuTextList = ["Isolation", "Waypoint", "Load Balancing"]
+    for (var i = 1; i < menuItemNum; i++) {
+        var menu = menuItem.clone().translate({x: 0, y: h*i});
+        menu.children[1].content = menuTextList[i-1]
+        menuGroup.addChild(menu);
+    }
+    menuGroup.visible = false;
+    return menuGroup
 }
-menuGroup.visible = false;
 
 function onMenuItemEnter(event) {
     this.children[0].fillColor = 'yellow';
@@ -127,21 +89,49 @@ function onMenuItemLeave(event) {
     document.body.style.cursor = 'default';
 }
 
-// Annotation 
-var annoBar = new Path.Rectangle(new Point(10, 80), new Point(210, 120));
-annoBar.fillColor = 'white';
-annoBar.opacity = 0.65
-var annoText = new PointText(new Point(110, 104));
-annoText.justification = 'center';
-annoText.fillColor = 'black';
-annoText.content = 'anno: ';
-annoText.fontSize = 16
-var annoAddress = new Group([annoBar, annoText]);
-annoAddress.visible = false;
+/*
+Text box
+*/
 
-var fullNode = new Group([nodeGroup, menuGroup, annoAddress])
-// var fullNode = new Group([nodeGroup, menuGroup])
+function textWithBox(content) {
+    var annoText = new PointText(100, 100);
+    annoText.justification = 'center';
+    annoText.fillColor = 'black';
+    annoText.content = content;
+    annoText.fontSize = 16
+    var annoBar = new Path.Rectangle(annoText.strokeBounds.scale(1.1, 1.3));
+    annoBar.fillColor = 'white';
+    annoBar.opacity = 0.7
+    var annoAddress = new Group([annoBar, annoText]);
+    // annoAddress.visible = false;
+    return annoAddress;
+}
+
+/*
+FULL NODE: Node, Menu, Prefix address
+*/
+
+function createFullNode(name, address) {
+    nodeGroup = createNode(name);
+    menuGroup = createMenu();
+    annoAddress = textWithBox(address);
+    annoAddress.visible = false;
+
+    return new Group([nodeGroup, menuGroup, annoAddress]);
+}
+
+
+var current_node = "Z";
+function logNode(node, msg) {
+    log("[Node " + node + "] " + msg);
+}
+
 function onFullNodeEnter(event) {
+    name = this.firstChild.lastChild.content;
+    if (current_node != name) {
+        current_node = name;
+        logNode(name, "Show node info and menu");
+    }
     this.children[1].visible = true;
     this.children[2].visible = true;
 }
@@ -151,7 +141,10 @@ function onFullNodeLeave(event) {
 }
 
 function onFullNodeMenuClick(event) {
-    // console.log(this);
+    logNode(
+        this.parent.parent.parent.lastChild.firstChild.lastChild.content,
+        "Toggle interface visibility"
+    );
     this.parent.parent.parent.firstChild.visible = 
         !this.parent.parent.parent.firstChild.visible;
 }
@@ -165,17 +158,16 @@ var NodeList = new Group([]);
 for (var i = 0; i < NodeConfig.length; i++) {
     name = NodeConfig[i]["name"];
     isHealthy = NodeConfig[i]["healthy"];
-    prefix = NodeConfig[i]["prefix"];
-    n = fullNode.clone();
+    prefixString = "Prefix: " + NodeConfig[i]["prefix"];
+    x = NodeConfig[i]["pos"]['x']
+    y = NodeConfig[i]["pos"]['y']
+    var n = createFullNode(name, prefixString)
     n.children[0].visible = true;
-    // pos = (cp + {x:0, y:-320}).rotate(360/NodeConfig.length * i, cp) + {x:0, y:-50};
-    pos = (cp + {x:0, y:-320}).rotate(360/NodeConfig.length * i, cp);
-    n.position = pos;
+    // pos = (cp + {x:0, y:-320}).rotate(360/NodeConfig.length * i, cp);
+    n.position = new Point(x*view.viewSize._width, y*view.viewSize._height);
 
     n.onMouseEnter = onFullNodeEnter;
     n.onMouseLeave = onFullNodeLeave; 
-    n.children[0].children[1].content = name
-    n.children[2].children[1].content = "Prefix: " + prefix;
     if (isHealthy) {
         n.children[0].children[0].fillColor = "green";
     } else {
@@ -196,12 +188,9 @@ for (var i = 0; i < NodeConfig.length; i++) {
 /*
 Interfaces
 */
+
 function interfaceTo(from, to) {
     return from + (to - from)/3;
-}
-
-function interfaceAnnotationPos(from, to) {
-    return (interfaceTo(from, to) + from) / 2;
 }
 
 for (var i = 0; i < NodeConfig.length; i++) {
@@ -217,19 +206,18 @@ for (var i = 0; i < NodeConfig.length; i++) {
             strokeColor: 'yellow',
             strokeWidth: 10,
         }))
-        var anno = annoAddress.clone()
+        intf = interfaces[j]["intf_name"];
+        dst_routers = interfaces[j]["dst"];
+        content = "Interface: eth" + intf + "\n" 
+                + "Destination(s): " + dst_routers.join();
+        anno = textWithBox(content);
         // anno.position = interfaceAnnotationPos(src, dst);
         anno.position = interfaceTo(src, dst);
-        anno.children[0].scale(0.8, 1.4)
-        intf = interfaces[j]["intf_name"];
-        dst = interfaces[j]["dst"];
-        anno.children[1].content = "Interface: eth" + intf + "\n"
-            + "Destination(s): " + dst.join();
-        anno.children[1].translate(0, -8);
-        anno.visible = true;
+        // anno.visible = true
         lstInterface.addChild(anno);
     }
     lstInterface.visible = false;
+
 
     nodeWithInterface.addChild(lstInterface);
     nodeWithInterface.lastChild.sendToBack();
@@ -240,11 +228,7 @@ for (var i = 0; i < NodeConfig.length; i++) {
 /*
 LINKS
 */
-var t1 = toggleMousePosGroup.clone().translate(100, 100)
-var t2 = toggleMousePosGroup.clone().translate(100, 140)
-var t3 = toggleMousePosGroup.clone().translate(100, 180)
 
-// var expectedGroup = new Group([t1])
 var l1 = new Group([])
 for (var i = 0; i < Links["expected"].length; i++) {
     l1.addChild(new Path.Line({
@@ -255,60 +239,10 @@ for (var i = 0; i < Links["expected"].length; i++) {
     }))
     l1.lastChild.dashArray= [13, 10]
 }
-// var abnormalGroup = new Group([t2])
-var l2 = new Group([])
-for (var i = 0; i < Links["abnormal"].length; i++) {
-    l2.addChild(new Path.Line({
-        from: NodeList.children[Links["abnormal"][i][0]].position,
-        to: NodeList.children[Links["abnormal"][i][1]].position,
-        strokeColor: 'red',
-        strokeWidth: 5,
-    }))
-}
-
-// var normalGroup = new Group([t3])
-var l3 = new Group([])
-for (var i = 0; i < Links["normal"].length; i++) {
-    l3.addChild(new Path.Line({
-        from: NodeList.children[Links["normal"][i][0]].position,
-        to: NodeList.children[Links["normal"][i][1]].position,
-        strokeColor: 'green',
-        strokeWidth: 5,
-    }))
-}
-t1.onMouseDown = function() {
-    l1.visible = !l1.visible;
-}
-t2.onMouseDown = function() {
-    l2.visible = !l2.visible;
-}
-t3.onMouseDown = function() {
-    l3.visible = !l3.visible;
-}
-
-var lstToggles = [t1, t2, t3]
-var lstLinks = [l1, l2, l3]
-var lstToggleText = ["expected", "abnormal", "normal"]
-function onToogleEnter(event) {
-    document.body.style.cursor = "pointer";
-    this.opacity = 1
-}
-function onToogleLeave(event) {
-    document.body.style.cursor = "default";
-    this.opacity = 0.5
-}
-for (var i = 0; i < lstToggles.length; i++) {
-    lstToggles[i].opacity = 0.5;
-    lstToggles[i].lastChild.content = "Toggle " + lstToggleText[i] + " links";
-    lstToggles[i].onMouseEnter = onToogleEnter;
-    lstToggles[i].onMouseLeave = onToogleLeave;
-    lstLinks[i].sendToBack();
-}
+l1.sendToBack();
 
 function onResize(event) {
     NodeList.position = view.center + {x:0, y:-50}
     l1.position = view.center + {x:0, y:-50}
-    l2.position = view.center + {x:0, y:-50}
-    l3.position = view.center + {x:0, y:-211}
 }
 });
