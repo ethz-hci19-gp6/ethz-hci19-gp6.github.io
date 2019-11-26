@@ -1,5 +1,8 @@
 var file = $("#config").attr("config_file");
 var log_name = $("#config").attr("log_name");
+var _url = new URL(window.location.href);
+var uid = _url.searchParams.get("uid");
+if (!uid) uid = "bopo" + Date.now();
 
 $.getJSON(file, function(conf) {
 
@@ -12,7 +15,8 @@ Logging
 
 function log(msg) {
     var url = "https://lanwg.mikrounix.com/testlogger/";
-    var params = "name="+encodeURI(log_name+"_gui")+"&msg="+encodeURI(msg);
+    var params = "name=" + encodeURI(uid+"@"+log_name+"_gui")
+               + "&msg=" + encodeURI(msg);
     var xhr = new XMLHttpRequest()
     xhr.open('POST', url, true)
     // xhr.withCredentials = true
