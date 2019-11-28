@@ -1,0 +1,125 @@
+[11-27-2019 17:22:37.988]  <hI2ygTxa@landing>  study start!
+[11-27-2019 17:25:20.313]  <hI2ygTxa@landing>  opening link: tut_text
+[11-27-2019 17:25:51.133]  <hI2ygTxa@landing>  opening link: tut_gui
+[11-27-2019 17:39:24.103]  <hI2ygTxa@landing>  opening link: tut_text
+[11-27-2019 17:40:13.827]  <hI2ygTxa@landing>  opening link: p1_va_text
+[11-27-2019 17:41:22.575]  <hI2ygTxa@p1_va_text>  opened file MAP
+[11-27-2019 17:41:34.756]  <hI2ygTxa@p1_va_text>  opened file A
+[11-27-2019 17:41:35.931]  <hI2ygTxa@p1_va_text>  open analyze menu on A
+[11-27-2019 17:41:37.609]  <hI2ygTxa@p1_va_text>  expand reachability on A
+[11-27-2019 17:41:38.989]  <hI2ygTxa@p1_va_text>  highlight lines concerning C on A
+[11-27-2019 17:41:50.428]  <hI2ygTxa@p1_va_text>  highlight lines concerning D on A
+[11-27-2019 17:41:53.189]  <hI2ygTxa@p1_va_text>  highlight lines concerning C on A
+[11-27-2019 17:42:12.217]  <hI2ygTxa@p1_va_text>  opened file C
+[11-27-2019 17:42:13.760]  <hI2ygTxa@p1_va_text>  open analyze menu on C
+[11-27-2019 17:42:15.364]  <hI2ygTxa@p1_va_text>  expand reachability on C
+[11-27-2019 17:42:20.872]  <hI2ygTxa@p1_va_text>  highlight lines concerning A on C
+[11-27-2019 17:42:23.426]  <hI2ygTxa@p1_va_text>  opened file MAP
+[11-27-2019 17:42:37.729]  <hI2ygTxa@landing>  opening link: p1_vb_gui
+[11-27-2019 17:42:54.696]  <hI2ygTxa@p1_vb_gui>  [Node B] Show node info and menu
+[11-27-2019 17:43:11.810]  <hI2ygTxa@p1_vb_gui>  [Node A] Show node info and menu
+[11-27-2019 17:43:12.835]  <hI2ygTxa@p1_vb_gui>  [Node A] Toggle interface visibility
+[11-27-2019 17:43:20.776]  <hI2ygTxa@p1_vb_gui>  [Node B] Show node info and menu
+[11-27-2019 17:43:24.179]  <hI2ygTxa@p1_vb_gui>  [Node C] Show node info and menu
+[11-27-2019 17:43:25.245]  <hI2ygTxa@p1_vb_gui>  [Node A] Show node info and menu
+[11-27-2019 17:43:26.099]  <hI2ygTxa@p1_vb_gui>  [Node A] Toggle interface visibility
+[11-27-2019 17:43:27.130]  <hI2ygTxa@p1_vb_gui>  [Node B] Show node info and menu
+[11-27-2019 17:43:28.125]  <hI2ygTxa@p1_vb_gui>  [Node B] Toggle interface visibility
+[11-27-2019 17:43:31.029]  <hI2ygTxa@p1_vb_gui>  [Node A] Show node info and menu
+[11-27-2019 17:43:42.686]  <hI2ygTxa@p1_vb_gui>  [Node B] Show node info and menu
+[11-27-2019 17:43:46.710]  <hI2ygTxa@p1_vb_gui>  [Node B] Toggle interface visibility
+[11-27-2019 17:46:27.015]  <hI2ygTxa@landing>  opening link: p2_vb_text
+[11-27-2019 17:46:31.818]  <hI2ygTxa@p2_vb_text>  opened file MAP
+[11-27-2019 17:47:02.363]  <hI2ygTxa@p2_vb_text>  opened file K
+[11-27-2019 17:47:04.029]  <hI2ygTxa@p2_vb_text>  open analyze menu on K
+[11-27-2019 17:47:06.256]  <hI2ygTxa@p2_vb_text>  expand reachability on K
+[11-27-2019 17:47:10.739]  <hI2ygTxa@p2_vb_text>  switch to tab MAP
+[11-27-2019 17:47:18.354]  <hI2ygTxa@p2_vb_text>  switch to tab K
+[11-27-2019 17:47:20.046]  <hI2ygTxa@p2_vb_text>  open analyze menu on K
+[11-27-2019 17:47:26.481]  <hI2ygTxa@p2_vb_text>  expand reachability on K
+[11-27-2019 17:47:28.566]  <hI2ygTxa@p2_vb_text>  highlight lines concerning G on K
+[11-27-2019 17:47:32.637]  <hI2ygTxa@p2_vb_text>  highlight lines concerning F on K
+[11-27-2019 17:47:42.315]  <hI2ygTxa@p2_vb_text>  closed file K
+[11-27-2019 17:47:46.194]  <hI2ygTxa@p2_vb_text>  opened file E
+[11-27-2019 17:47:47.623]  <hI2ygTxa@p2_vb_text>  open analyze menu on E
+[11-27-2019 17:47:49.447]  <hI2ygTxa@p2_vb_text>  expand reachability on E
+[11-27-2019 17:47:54.161]  <hI2ygTxa@p2_vb_text>  highlight lines concerning K on E
+[11-27-2019 17:48:05.470]  <hI2ygTxa@p2_vb_text>  closed file E
+[11-27-2019 17:48:20.312]  <hI2ygTxa@landing>  opening link: p2_vb_text
+[11-27-2019 17:48:25.117]  <hI2ygTxa@p2_vb_text>  opened file MAP
+[11-27-2019 17:48:42.892]  <hI2ygTxa@p2_vb_text>  opened file B
+[11-27-2019 17:48:44.681]  <hI2ygTxa@p2_vb_text>  open analyze menu on B
+[11-27-2019 17:48:46.084]  <hI2ygTxa@p2_vb_text>  expand reachability on B
+[11-27-2019 17:48:47.428]  <hI2ygTxa@p2_vb_text>  highlight lines concerning I on B
+[11-27-2019 17:49:01.544]  <hI2ygTxa@p2_vb_text>  switch to tab MAP
+[11-27-2019 17:49:07.799]  <hI2ygTxa@p2_vb_text>  opened file D
+[11-27-2019 17:49:09.058]  <hI2ygTxa@p2_vb_text>  open analyze menu on D
+[11-27-2019 17:49:10.360]  <hI2ygTxa@p2_vb_text>  expand reachability on D
+[11-27-2019 17:49:11.916]  <hI2ygTxa@p2_vb_text>  highlight lines concerning I on D
+[11-27-2019 17:49:14.579]  <hI2ygTxa@p2_vb_text>  switch to tab MAP
+[11-27-2019 17:49:22.912]  <hI2ygTxa@p2_vb_text>  opened file A
+[11-27-2019 17:49:25.119]  <hI2ygTxa@p2_vb_text>  open analyze menu on A
+[11-27-2019 17:49:26.322]  <hI2ygTxa@p2_vb_text>  expand reachability on A
+[11-27-2019 17:49:27.695]  <hI2ygTxa@p2_vb_text>  highlight lines concerning I on A
+[11-27-2019 17:49:30.034]  <hI2ygTxa@p2_vb_text>  switch to tab MAP
+[11-27-2019 17:49:33.245]  <hI2ygTxa@p2_vb_text>  opened file G
+[11-27-2019 17:49:34.589]  <hI2ygTxa@p2_vb_text>  open analyze menu on G
+[11-27-2019 17:49:39.498]  <hI2ygTxa@p2_vb_text>  expand reachability on G
+[11-27-2019 17:49:40.879]  <hI2ygTxa@p2_vb_text>  highlight lines concerning I on G
+[11-27-2019 17:49:44.780]  <hI2ygTxa@p2_vb_text>  switch to tab MAP
+[11-27-2019 17:49:59.097]  <hI2ygTxa@landing>  opening link: p2_va_gui
+[11-27-2019 17:50:24.701]  <hI2ygTxa@p2_va_gui>  [Node G] Show node info and menu
+[11-27-2019 17:50:29.941]  <hI2ygTxa@p2_va_gui>  [Node E] Show node info and menu
+[11-27-2019 17:50:37.503]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:50:39.999]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:50:41.979]  <hI2ygTxa@p2_va_gui>  [Node C] Show node info and menu
+[11-27-2019 17:50:42.276]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:50:42.746]  <hI2ygTxa@p2_va_gui>  [Node E] Show node info and menu
+[11-27-2019 17:50:43.756]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:50:44.609]  <hI2ygTxa@p2_va_gui>  [Node E] Show node info and menu
+[11-27-2019 17:50:50.510]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:50:51.518]  <hI2ygTxa@p2_va_gui>  [Node E] Show node info and menu
+[11-27-2019 17:50:53.540]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:50:54.084]  <hI2ygTxa@p2_va_gui>  [Node E] Show node info and menu
+[11-27-2019 17:51:05.044]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:51:06.056]  <hI2ygTxa@p2_va_gui>  [Node E] Show node info and menu
+[11-27-2019 17:51:08.483]  <hI2ygTxa@p2_va_gui>  [Node E] Toggle interface visibility
+[11-27-2019 17:51:10.387]  <hI2ygTxa@p2_va_gui>  [Node A] Show node info and menu
+[11-27-2019 17:51:14.045]  <hI2ygTxa@p2_va_gui>  [Node E] Show node info and menu
+[11-27-2019 17:51:15.730]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:51:17.700]  <hI2ygTxa@p2_va_gui>  [Node F] Show node info and menu
+[11-27-2019 17:51:18.364]  <hI2ygTxa@p2_va_gui>  [Node K] Show node info and menu
+[11-27-2019 17:51:18.696]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:51:19.644]  <hI2ygTxa@p2_va_gui>  [Node H] Toggle interface visibility
+[11-27-2019 17:51:22.117]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:25.801]  <hI2ygTxa@p2_va_gui>  [Node I] Toggle interface visibility
+[11-27-2019 17:51:30.148]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:32.270]  <hI2ygTxa@p2_va_gui>  [Node D] Toggle interface visibility
+[11-27-2019 17:51:37.715]  <hI2ygTxa@p2_va_gui>  [Node F] Show node info and menu
+[11-27-2019 17:51:39.155]  <hI2ygTxa@p2_va_gui>  [Node E] Show node info and menu
+[11-27-2019 17:51:41.262]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:51:42.611]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:42.978]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:44.132]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:51:45.087]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:45.329]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:47.009]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:47.312]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:47.916]  <hI2ygTxa@p2_va_gui>  [Node E] Show node info and menu
+[11-27-2019 17:51:48.310]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:51:53.608]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:53.660]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:53.945]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:54.178]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:54.517]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:57.546]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:57.629]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:57.763]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:57.894]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:58.062]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:58.226]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:51:58.346]  <hI2ygTxa@p2_va_gui>  [Node D] Show node info and menu
+[11-27-2019 17:51:58.546]  <hI2ygTxa@p2_va_gui>  [Node I] Show node info and menu
+[11-27-2019 17:52:08.613]  <hI2ygTxa@p2_va_gui>  [Node F] Show node info and menu
+[11-27-2019 17:52:09.292]  <hI2ygTxa@p2_va_gui>  [Node H] Show node info and menu
+[11-27-2019 17:52:10.280]  <hI2ygTxa@p2_va_gui>  [Node C] Show node info and menu
