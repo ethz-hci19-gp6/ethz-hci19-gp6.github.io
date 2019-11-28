@@ -4,8 +4,24 @@
 1. Place the script at the same level as the folder containing logs
 2. Make sure the logs folder is named "d"
 3. `ruby log_analysis.rb`
+4. The results are of the format
+```ruby
+{
+    USER_ID => {
+        TEST_NAME => TOTAL_TIME_IN_SEC,
+        .
+        .
+        .
+    },
+    .
+    .
+    .
+}
+```
 
 ## Analysis result for sample logs folder
+
+
 ```ruby
 {
     "hI2ygTxa" => {
