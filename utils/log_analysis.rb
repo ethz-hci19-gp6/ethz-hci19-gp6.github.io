@@ -1,6 +1,26 @@
 require 'awesome_print'
 require 'time'
 
+module Enumerable
+    def sum
+      self.reduce(:+)
+    end
+
+    def mean
+      (self.sum/self.length.to_f).round(3)
+    end
+
+    def sample_variance
+      m = self.mean
+      sum = self.inject(0){|accum, i| accum +(i-m)**2 }
+      sum/(self.length - 1).to_f
+    end
+
+    def standard_deviation
+      Math.sqrt(self.sample_variance).round(3)
+    end
+end 
+
 # for all logs
 files = Dir["d/*"]
 records = {}
@@ -46,8 +66,67 @@ a.each do |e, ts|
 end
 
 # user wise
+puts "\nRaw data user wise"
 ap r
 # event wise
-ap a
+# ap a
 # problem wise
+puts "\nRaw data problem wise"
 ap pr
+
+# processed data
+# user
+p_u = {}
+l_u = []
+r.each do |u, ts|
+    l_t = []
+    ts.each {|_, v| l_t << v;}
+    l_u << l_t.mean
+    p_u[u] = l_u[-1]
+end
+puts "\nUser Average Completion Time: %.3f" %  l_u.mean
+puts "User Completion Time SD: %.3f" % l_u.standard_deviation
+ap p_u
+
+# problem + interface
+p_p = {}
+pr.each do |pn, d|
+    lt = []
+    d["text"].each {|_, v| lt += v}
+    lg = []
+    d["gui"].each {|_, v| lg += v}
+    p_p[pn] = {}
+    p_p[pn]["avg"] = (lt+lg).mean
+    p_p[pn]["SD"] = (lt+lg).standard_deviation
+    p_p[pn]["text"] = {
+        "avg" => lt.mean,
+        "SD" => lt.standard_deviation
+    }
+    p_p[pn]["gui"] = {
+        "avg" => lg.mean,
+        "SD" => lg.standard_deviation
+    }
+end
+
+puts "\nProblem Average Time with Interface"
+ap p_p
+
+# problem version
+p_v = {}
+pr.each do |pn, d|
+    l_a = d["text"]["va"] + d["gui"]["va"]
+    l_b = d["text"]["vb"] + d["gui"]["vb"]
+    p_v[pn] = {
+        "va" => {
+            "avg" => l_a.mean,
+            "SD" => l_a.standard_deviation
+        },
+        "vb" => {
+            "avg" => l_b.mean,
+            "SD" => l_b.standard_deviation
+        }
+    }
+end
+
+puts "\nProblem Version Average Time"
+ap p_v
