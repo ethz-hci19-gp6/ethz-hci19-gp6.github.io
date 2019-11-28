@@ -33,15 +33,6 @@
 [11-27-2019 16:41:36.023]  <5mZo33UN@p1_vb_text>  expand reachability on B
 [11-27-2019 16:42:32.494]  <5mZo33UN@landing>  opening link: p1_vb_gui
 [11-27-2019 16:42:36.798]  <5mZo33UN@p1_vb_text>  switch to tab A
-[11-27-2019 16:42:43.820]  <5mZo33UN@landing>  opening link: p1_va_gui
-[11-27-2019 16:42:45.422]  <5mZo33UN@p1_va_gui>  [Node A] Show node info and menu
-[11-27-2019 16:42:46.070]  <5mZo33UN@p1_va_gui>  [Node A] Toggle interface visibility
-[11-27-2019 16:42:47.404]  <5mZo33UN@p1_va_gui>  [Node C] Show node info and menu
-[11-27-2019 16:42:48.986]  <5mZo33UN@p1_va_gui>  [Node C] Toggle interface visibility
-[11-27-2019 16:42:50.079]  <5mZo33UN@p1_va_gui>  [Node D] Show node info and menu
-[11-27-2019 16:42:51.060]  <5mZo33UN@p1_va_gui>  [Node D] Toggle interface visibility
-[11-27-2019 16:42:52.071]  <5mZo33UN@p1_va_gui>  [Node B] Show node info and menu
-[11-27-2019 16:42:54.637]  <5mZo33UN@p1_va_gui>  [Node B] Toggle interface visibility
 [11-27-2019 16:46:29.397]  <5mZo33UN@landing>  opening link: p2_vb_gui
 [11-27-2019 16:46:31.659]  <5mZo33UN@p2_vb_gui>  [Node A] Show node info and menu
 [11-27-2019 16:46:33.172]  <5mZo33UN@p2_vb_gui>  [Node A] Toggle interface visibility
