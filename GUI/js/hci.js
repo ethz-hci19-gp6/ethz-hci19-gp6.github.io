@@ -1,8 +1,4 @@
 var file = $("#config").attr("config_file");
-var log_name = $("#config").attr("log_name");
-var _url = new URL(window.location.href);
-var uid = _url.searchParams.get("uid");
-if (!uid) uid = "bopo" + Date.now();
 
 // nodeSize
 // nodeTextSize
@@ -13,24 +9,6 @@ $.getJSON(file, function(conf) {
 
 var NodeConfig = conf["nodes"];
 var Links = conf["links"];
-
-/*
-Logging
-*/
-
-function log(msg) {
-    // disable logging for final prototype
-    return
-
-    var url = "https://lanwg.mikrounix.com/testlogger/";
-    var params = "name=" + encodeURI(uid+"@"+log_name+"_gui")
-               + "&msg=" + encodeURI(msg);
-    var xhr = new XMLHttpRequest()
-    xhr.open('POST', url, true)
-    // xhr.withCredentials = true
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(params);
-}
 
 /*
 NODE
@@ -133,17 +111,8 @@ function createFullNode(name, address) {
 }
 
 
-var current_node = "Z";
-function logNode(node, msg) {
-    log("[Node " + node + "] " + msg);
-}
-
 function onFullNodeEnter(event) {
     name = this.firstChild.lastChild.content;
-    if (current_node != name) {
-        current_node = name;
-        logNode(name, "Show node info and menu");
-    }
     this.children[1].visible = true;
     this.children[2].visible = true;
 }
@@ -153,10 +122,6 @@ function onFullNodeLeave(event) {
 }
 
 function onFullNodeMenuClick(event) {
-    logNode(
-        this.parent.parent.parent.lastChild.firstChild.lastChild.content,
-        "Toggle interface visibility"
-    );
     this.parent.parent.parent.firstChild.visible = 
         !this.parent.parent.parent.firstChild.visible;
 }
