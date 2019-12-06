@@ -14,6 +14,9 @@ Logging
 */
 
 function log(msg) {
+    // disable logging for final prototype
+    return
+
     var url = "https://lanwg.mikrounix.com/testlogger/";
     var params = "name=" + encodeURI(uid+"@"+log_name+"_gui")
                + "&msg=" + encodeURI(msg);
