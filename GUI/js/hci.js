@@ -9,6 +9,7 @@ $.getJSON(file, function(conf) {
 
 var NodeConfig = conf["nodes"];
 var Links = conf["links"];
+var manualMode = true;
 
 /*
 NODE
@@ -113,11 +114,15 @@ function createFullNode(name, address) {
 
 function onFullNodeEnter(event) {
     name = this.firstChild.lastChild.content;
-    this.children[1].visible = true;
+    if (manualMode) {
+        this.children[1].visible = true;
+    }
     this.children[2].visible = true;
 }
 function onFullNodeLeave(event) {
-    this.children[1].visible = false;
+    if (manualMode) {
+        this.children[1].visible = false;
+    }
     this.children[2].visible = false;
 }
 
@@ -130,10 +135,12 @@ function onFullNodeMenuClick(event) {
 GUI Graph
 */
 var cp = view.center
+var name2ID = {};
 
 var NodeList = new Group([]);
 for (var i = 0; i < NodeConfig.length; i++) {
     name = NodeConfig[i]["name"];
+    name2ID[name] = i;
     isHealthy = NodeConfig[i]["healthy"];
     prefixString = "Prefix: " + NodeConfig[i]["prefix"];
     x = NodeConfig[i]["pos"]['x']
@@ -217,6 +224,25 @@ for (var i = 0; i < Links["expected"].length; i++) {
     l1.lastChild.dashArray= [13, 10]
 }
 l1.sendToBack();
+
+window.enterNode = function(node) {
+    manualMode = false;
+    NodeList.children[name2ID[node]].children[1].emit("mouseenter");
+    manualMode = true;
+}
+
+window.leaveNode = function(node) {
+    manualMode = false;
+    NodeList.children[name2ID[node]].children[1].emit("mouseleave");
+    manualMode = true;
+}
+
+window.interfaceToggle = function(node) {
+    manualMode = false;
+    NodeList.children[name2ID[node]]
+            .lastChild.children[1].firstChild.emit("mousedown");
+    manualMode = true;
+}
 
 function onResize(event) {
     NodeList.position = view.center + {x:0, y:-50}
