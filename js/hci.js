@@ -4,6 +4,11 @@ var _url = new URL(window.location.href);
 var uid = _url.searchParams.get("uid");
 if (!uid) uid = "bopo" + Date.now();
 
+// nodeSize
+// nodeTextSize
+// menuSize
+// menuTextSize
+
 $.getJSON(file, function(conf) {
 
 var NodeConfig = conf["nodes"];
