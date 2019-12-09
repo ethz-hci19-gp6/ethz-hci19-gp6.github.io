@@ -217,7 +217,7 @@ for (var i = 0; i < NodeConfig.length; i++) {
                 new Path.Line({
                     from: src,
                     to: interfaceTo(src, dst),
-                    strokeColor: 'yellow',
+                    strokeColor: '#99ff66',
                     strokeWidth: NODE_SIDE/6,
                     // visible: false,
                 })
