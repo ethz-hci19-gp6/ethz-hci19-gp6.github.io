@@ -1,8 +1,9 @@
 var file = $("#config").attr("config_file");
 
-// nodeSize
-// nodeTextSize
-// menuSize
+// node Size
+var NODE_SIDE = 40;
+// textSize
+var MAX_TEXT_HEIGHT = 40
 // menuTextSize
 
 $.getJSON(file, function(conf) {
@@ -15,20 +16,20 @@ var manualMode = true;
 NODE
 */
 function createNode(name) {
-    var node = new Path.Rectangle(
-        new Point(40,40), new Point(80, 80), new Size(10, 10));
+    var _size = new Size(NODE_SIDE, NODE_SIDE);
+    var node = new Path.Rectangle(new Point(0, 0), _size, _size/4);
     node.fillColor = 'white';
 
-    var nodeText = new PointText(new Point(60, 67));
+    var nodeText = new PointText(new Point(NODE_SIDE/2, NODE_SIDE/1.3));
     nodeText.justification = 'center';
     nodeText.fillColor = 'white';
     nodeText.content = name;
-    nodeText.fontSize = 20;
+    nodeText.fontSize = NODE_SIDE/1.3;
     nodeText.fontWeight = "bold";
 
     var nodeGroup = new Group([node, nodeText]);
-    nodeGroup.scale(2);
-    nodeGroup.translate({x: 50, y: 100});
+    // nodeGroup.scale(2);
+    // nodeGroup.translate({x: 50, y: 100});
     nodeGroup.visible = false;
     return nodeGroup
 }
@@ -37,24 +38,25 @@ function createNode(name) {
 MENU
 */
 function createMenu() {
-    var x = 80;
-    var y = 198;
-    var l = 200;
-    var h = 40;
+    var x = 0;
+    var y = NODE_SIDE-(0.1*NODE_SIDE);
+    var menu_unit = Math.min(NODE_SIDE, MAX_TEXT_HEIGHT);
+    var l = menu_unit * 5;
+    var h = menu_unit;
 
     var menuBar = new Path.Rectangle(new Point(x, y), new Point(x+l, y+h));
     menuBar.strokeColor = 'white';
     menuBar.fillColor = 'black';
-    var menuText = new PointText(new Point(x+l/2, y+h/2+4));
+    var menuText = new PointText(new Point(x+l/2, y+0.6*h));
     menuText.justification = 'center';
     menuText.fillColor = 'white';
     menuText.content = 'Reachability';
-    menuText.fontSize = 16
+    menuText.fontSize = menu_unit*0.4;
     var menuItem = new Group([menuBar, menuText]);
 
     var menuGroup = new Group([menuItem]);
     var menuItemNum = 4
-    var menuTextList = ["Isolation", "Waypoint", "Load Balancing"]
+    var menuTextList = ["Waypoint", "Load Balancing", "Isolation"]
     for (var i = 1; i < menuItemNum; i++) {
         var menu = menuItem.clone().translate({x: 0, y: h*i});
         menu.children[1].content = menuTextList[i-1]
@@ -85,11 +87,12 @@ Text box
 */
 
 function textWithBox(content) {
-    var annoText = new PointText(100, 100);
+    var box_unit = Math.min(NODE_SIDE, MAX_TEXT_HEIGHT)
+    var annoText = new PointText(NODE_SIDE/2, -NODE_SIDE/5);
     annoText.justification = 'center';
     annoText.fillColor = 'black';
     annoText.content = content;
-    annoText.fontSize = 16
+    annoText.fontSize = 0.4*box_unit;
     var annoBar = new Path.Rectangle(annoText.strokeBounds.scale(1.1, 1.3));
     annoBar.fillColor = 'white';
     annoBar.opacity = 0.7
@@ -131,16 +134,31 @@ function onFullNodeMenuClick(event) {
         !this.parent.parent.parent.firstChild.visible;
 }
 
+function onFullNodeMenuClick2(event) {
+    event_key = "R"+this.parent.parent.firstChild.lastChild.content;
+
+    for (var k in intfDict) {
+        if (k != event_key) intfDict[k].visible = false;
+        else intfDict[k].visible = ! intfDict[k].visible;
+    }
+}
+
 /*
 GUI Graph
 */
 var cp = view.center
 var name2ID = {};
 
+var intfDict = {};
+
 var NodeList = new Group([]);
 for (var i = 0; i < NodeConfig.length; i++) {
     name = NodeConfig[i]["name"];
     name2ID[name] = i;
+    intfDict["R"+name] = new Group([]);
+    intfDict["R"+name].sendToBack();
+    intfDict["R"+name].visible = false;
+
     isHealthy = NodeConfig[i]["healthy"];
     prefixString = "Prefix: " + NodeConfig[i]["prefix"];
     x = NodeConfig[i]["pos"]['x']
@@ -152,13 +170,15 @@ for (var i = 0; i < NodeConfig.length; i++) {
 
     n.onMouseEnter = onFullNodeEnter;
     n.onMouseLeave = onFullNodeLeave; 
-    if (isHealthy) {
-        n.children[0].children[0].fillColor = "green";
-    } else {
-        n.children[0].children[0].fillColor = "red";
-    }
+    // redefine healthy
+    n.children[0].children[0].fillColor = "green";
+    // if (isHealthy) {
+    //     n.children[0].children[0].fillColor = "green";
+    // } else {
+    //     n.children[0].children[0].fillColor = "red";
+    // }
     for (var j = 0; j < n.children[1].children.length; j++) {
-        if (j == 0) {
+        if (j == 0 || j == 1) {
             n.children[1].children[j].onMouseEnter = onMenuItemEnter;
         } else {
             n.children[1].children[j].onMouseEnter = onMenuItemEnter2;
@@ -188,10 +208,21 @@ for (var i = 0; i < NodeConfig.length; i++) {
             from: src,
             to: interfaceTo(src, dst),
             strokeColor: 'yellow',
-            strokeWidth: 10,
+            strokeWidth: NODE_SIDE/6,
         }))
         intf = interfaces[j]["intf_name"];
         dst_routers = interfaces[j]["dst"];
+        for (var k = 0; k < dst_routers.length; k++) {
+            intfDict[dst_routers[k]].addChild(
+                new Path.Line({
+                    from: src,
+                    to: interfaceTo(src, dst),
+                    strokeColor: 'yellow',
+                    strokeWidth: NODE_SIDE/6,
+                    // visible: false,
+                })
+            );
+        }
         content = "Interface: eth" + intf + "\n" 
                 + "Destination(s): " + dst_routers.join();
         anno = textWithBox(content);
@@ -207,7 +238,13 @@ for (var i = 0; i < NodeConfig.length; i++) {
     nodeWithInterface.lastChild.sendToBack();
     //  interface+node node+menu menu     first item
     nodeWithInterface.lastChild.children[1].firstChild.onMouseDown = onFullNodeMenuClick;
+    nodeWithInterface.lastChild.children[1].children[1].onMouseDown = onFullNodeMenuClick2;
 }
+
+// for (var i = 0; i < NodeList.children.length; i++) {
+//     n = NodeList.children[i];
+//     for (var j = 0; j < n.firstChild.children.length)
+// }
 
 /*
 LINKS
@@ -219,7 +256,7 @@ for (var i = 0; i < Links["expected"].length; i++) {
         from: NodeList.children[Links["expected"][i][0]].position,
         to: NodeList.children[Links["expected"][i][1]].position,
         strokeColor: 'blue',
-        strokeWidth: 5,
+        strokeWidth: NODE_SIDE/16,
     }))
     l1.lastChild.dashArray= [13, 10]
 }
@@ -241,6 +278,13 @@ window.interfaceToggle = function(node) {
     manualMode = false;
     NodeList.children[name2ID[node]]
             .lastChild.children[1].firstChild.emit("mousedown");
+    manualMode = true;
+}
+
+window.waypointToggle = function(node) {
+    manualMode = false;
+    NodeList.children[name2ID[node]]
+            .lastChild.children[1].children[1].emit("mousedown");
     manualMode = true;
 }
 
