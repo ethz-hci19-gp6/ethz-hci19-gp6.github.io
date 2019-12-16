@@ -128,7 +128,7 @@ function createFullNode(name, address) {
     nodeGroup = createNode(name);
     menuGroup = createMenu();
     annoAddress = textWithBox(address);
-    // annoAddress.visible = false;
+    annoAddress.visible = false;
 
     return new Group([nodeGroup, menuGroup, annoAddress]);
 }
