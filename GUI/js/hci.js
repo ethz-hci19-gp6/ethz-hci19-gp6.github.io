@@ -3,8 +3,14 @@ var file = $("#config").attr("config_file");
 // node Size
 var NODE_SIDE = 40;
 // textSize
-var MAX_TEXT_HEIGHT = 40
-// menuTextSize
+var MAX_TEXT_HEIGHT = 40;
+// colors
+var EXPECTED_LINK_COLOR = "white";
+var INTERFACE_LINK_COLOR = "yellow";
+// var WAYPOINT_LINKS_COLOR = '#99ff66';
+var WAYPOINT_LINKS_COLOR = '#00ffff';
+
+
 
 $.getJSON(file, function(conf) {
 
@@ -207,7 +213,7 @@ for (var i = 0; i < NodeConfig.length; i++) {
         lstInterface.addChild(new Path.Line({
             from: src,
             to: interfaceTo(src, dst),
-            strokeColor: 'yellow',
+            strokeColor: INTERFACE_LINK_COLOR,
             strokeWidth: NODE_SIDE/6,
         }))
         intf = interfaces[j]["intf_name"];
@@ -217,7 +223,7 @@ for (var i = 0; i < NodeConfig.length; i++) {
                 new Path.Line({
                     from: src,
                     to: interfaceTo(src, dst),
-                    strokeColor: '#99ff66',
+                    strokeColor: WAYPOINT_LINKS_COLOR,
                     strokeWidth: NODE_SIDE/6,
                     // visible: false,
                 })
@@ -255,7 +261,7 @@ for (var i = 0; i < Links["expected"].length; i++) {
     l1.addChild(new Path.Line({
         from: NodeList.children[Links["expected"][i][0]].position,
         to: NodeList.children[Links["expected"][i][1]].position,
-        strokeColor: 'blue',
+        strokeColor: EXPECTED_LINK_COLOR,
         strokeWidth: NODE_SIDE/16,
     }))
     l1.lastChild.dashArray= [13, 10]

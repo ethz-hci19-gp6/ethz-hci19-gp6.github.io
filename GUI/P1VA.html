@@ -3,13 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <title>ETHZ HCI19 GP6 GUI</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/paper-full.js"></script>
     <script type="text/paperscript" src="js/hci.js" canvas="canvas"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <!-- <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myList li").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
 </head>
 <body>
+
+    <!-- <h2>Filterable List</h2>
+    <p>Type something in the input field to search the list for specific items:</p>  
+    <input id="myInput" type="text" placeholder="Search..">
+    <br>
+
+    <ul id="myList">
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item</li>
+        <li>Fourth</li>
+    </ul> -->
+
+    <div class="container">
+        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">
+            Advanced Search &nbsp; <i class="fas fa-search"></i>
+        </button>
+        
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+            
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                    <h4 class="modal-title">Advanced Search &nbsp; <i class="fas fa-search"></i></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+            
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                    <!-- Modal body..  -->
+
+<div class="container">
+	<div class="row">
+	    <form class="col-md-4">
+	        <label><span class="badge badge-success">Query Target Node</span> &nbsp;</label>
+	        <select class="form-control select2">
+	           <option>A</option> 
+	           <option>B</option> 
+	           <option>C</option> 
+	           <option>D</option> 
+	           <!-- <option>E</option> 
+	           <option>F</option> 
+	           <option></option>  -->
+	        </select>
+	    </form>
+	    <form class="col-md-4">
+	        <label><span class="badge badge-light">Query Type</span> &nbsp;</label>
+	        <select class="form-control select2">
+	           <option>Reachability</option> 
+	           <option>Waypoints</option> 
+	           <option>Isolation</option> 
+	           <option>Load balancing</option> 
+	           <!-- <option>E</option> 
+	           <option>F</option> 
+	           <option></option>  -->
+	        </select>
+	    </form>
+	    <form class="col-md-4">
+	        <label><span class="badge badge-primary">Related Node(s)</span> &nbsp;</label>
+	        <select class="form-control select2">
+	           <option>(All)</option> 
+	           <option>A</option> 
+	           <option>B</option> 
+	           <option>C</option> 
+	           <option>D</option> 
+	           <!-- <option>E</option> 
+	           <option>F</option> 
+	           <option></option>  -->
+	        </select>
+	    </form>
+ 	</div>
+</div>
+<script>
+    $('.select2').select2();
+</script>
+</div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="showTraffic()">Search</button>
+                    <script>
+                        function showTraffic() {
+                            window.waypointToggle("C");
+                        }
+                    </script>
+
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+      </div>
+
     <p hidden id="config" config_file="configs/P1VA.json" log_name="p1_va"></p>
     <canvas id="canvas" resize stats hidpi="off"></canvas>
+
 </body>
+
+
 </html>
