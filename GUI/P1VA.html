@@ -10,35 +10,10 @@
     <script type="text/javascript" src="js/paper-full.js"></script>
     <script type="text/paperscript" src="js/hci.js" canvas="canvas"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-
-    <!-- <script>
-        $(document).ready(function(){
-          $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myList li").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-          });
-        });
-    </script> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </head>
 <body>
-
-    <!-- <h2>Filterable List</h2>
-    <p>Type something in the input field to search the list for specific items:</p>  
-    <input id="myInput" type="text" placeholder="Search..">
-    <br>
-
-    <ul id="myList">
-        <li>First item</li>
-        <li>Second item</li>
-        <li>Third item</li>
-        <li>Fourth</li>
-    </ul> -->
 
     <div class="container">
         <!-- Button to Open the Modal -->
@@ -73,7 +48,7 @@
                                         <!-- </span> -->
                                         &nbsp;Target Node&nbsp;&nbsp;&nbsp;&nbsp;
                                     </label>
-                    	            <select class="form-control select2">
+                    	            <select class="form-control select2" id="target_node">
                     	            <option>&nbsp;&nbsp;&nbsp;&nbsp;</option> 
                     	            <option>A</option> 
                     	            <option>B</option> 
@@ -213,9 +188,11 @@
                     <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="showTraffic()">Search</button>
                     <script>
-                        function showTraffic() {
-                            window.waypointToggle("C");
-                        }
+                        // $( document ).ready(function() {
+                            function showTraffic() {
+                                window.waypointToggle($("#target_node").val());
+                            }
+                        // });
                     </script>
 
                     </div>

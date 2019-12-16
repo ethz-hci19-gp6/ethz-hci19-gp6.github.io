@@ -1,16 +1,28 @@
 var file = $("#config").attr("config_file");
 
+// For final proto
+var ABBR = {
+	"HMB": "Hamburg",
+	"BER": "Berlin",
+	"LON": "London",
+	"PRS": "Paris",
+	"ZRH": "Zurich",
+	"MDR": "Madrid",
+	"CAT": "Catalonio",
+	"MIL": "Milan",
+	"VNA": "Vienna",
+	"PRG": "Prague",
+};
+
 // node Size
-var NODE_SIDE = 40;
+var NODE_SIDE = 160;
 // textSize
 var MAX_TEXT_HEIGHT = 40;
 // colors
 var EXPECTED_LINK_COLOR = "white";
 var INTERFACE_LINK_COLOR = "yellow";
 // var WAYPOINT_LINKS_COLOR = '#99ff66';
-var WAYPOINT_LINKS_COLOR = '#00ffff';
-
-
+var WAYPOINT_LINKS_COLOR = '#00ff00';
 
 $.getJSON(file, function(conf) {
 
@@ -22,11 +34,12 @@ var manualMode = true;
 NODE
 */
 function createNode(name) {
-    var _size = new Size(NODE_SIDE, NODE_SIDE);
-    var node = new Path.Rectangle(new Point(0, 0), _size, _size/4);
+    var _size = new Size(2 * NODE_SIDE, NODE_SIDE);
+    var round_corner = new Size(NODE_SIDE, NODE_SIDE)/4;
+    var node = new Path.Rectangle(new Point(0, 0), _size, round_corner);
     node.fillColor = 'white';
 
-    var nodeText = new PointText(new Point(NODE_SIDE/2, NODE_SIDE/1.3));
+    var nodeText = new PointText(new Point(NODE_SIDE, NODE_SIDE/1.3));
     nodeText.justification = 'center';
     nodeText.fillColor = 'white';
     nodeText.content = name;
@@ -94,7 +107,7 @@ Text box
 
 function textWithBox(content) {
     var box_unit = Math.min(NODE_SIDE, MAX_TEXT_HEIGHT)
-    var annoText = new PointText(NODE_SIDE/2, -NODE_SIDE/5);
+    var annoText = new PointText(NODE_SIDE, -NODE_SIDE/3);
     annoText.justification = 'center';
     annoText.fillColor = 'black';
     annoText.content = content;
@@ -134,6 +147,12 @@ function onFullNodeLeave(event) {
     }
     this.children[2].visible = false;
 }
+function onFullNodeEnterFinal(event) {
+    document.body.style.cursor = 'pointer';
+}
+function onFullNodeLeaveFinal(event) {
+    document.body.style.cursor = 'default';
+}
 
 function onFullNodeMenuClick(event) {
     this.parent.parent.parent.firstChild.visible = 
@@ -166,23 +185,26 @@ for (var i = 0; i < NodeConfig.length; i++) {
     intfDict["R"+name].visible = false;
 
     isHealthy = NodeConfig[i]["healthy"];
-    prefixString = "Prefix: " + NodeConfig[i]["prefix"];
-    x = NodeConfig[i]["pos"]['x']
-    y = NodeConfig[i]["pos"]['y']
+    // prefixString = "Prefix: " + NodeConfig[i]["prefix"];
+    prefixString = ABBR[name]
+    x = NodeConfig[i]["pos"]['x'] * 0.8 
+    y = NodeConfig[i]["pos"]['y'] * 0.8
     var n = createFullNode(name, prefixString)
     n.children[0].visible = true;
     // pos = (cp + {x:0, y:-320}).rotate(360/NodeConfig.length * i, cp);
-    n.position = new Point(x*view.viewSize._width, y*view.viewSize._height);
+    n.position = new Point(x*view.viewSize._width + 50, y*view.viewSize._height + 100);
 
-    n.onMouseEnter = onFullNodeEnter;
-    n.onMouseLeave = onFullNodeLeave; 
+    // n.onMouseEnter = onFullNodeEnter;
+    // n.onMouseLeave = onFullNodeLeave; 
+    n.onMouseEnter = onFullNodeEnterFinal;
+    n.onMouseLeave = onFullNodeLeaveFinal; 
     // redefine healthy
     n.children[0].children[0].fillColor = "green";
-    // if (isHealthy) {
-    //     n.children[0].children[0].fillColor = "green";
-    // } else {
-    //     n.children[0].children[0].fillColor = "red";
-    // }
+    if (isHealthy) {
+        n.children[0].children[0].fillColor = "green";
+    } else {
+        n.children[0].children[0].fillColor = "red";
+    }
     for (var j = 0; j < n.children[1].children.length; j++) {
         if (j == 0 || j == 1) {
             n.children[1].children[j].onMouseEnter = onMenuItemEnter;
